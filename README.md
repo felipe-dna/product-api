@@ -45,6 +45,7 @@ Products is a list of objects that must have the follow fields:
 
 ---
 
+
 ## Endpoints
 
 
@@ -335,9 +336,9 @@ Products is a list of objects that must have the follow fields:
 
 3.5 Response example:
 
-```json5
-// status-code: 204
-// NO BODY
+```md
+> **status-code:** 204
+> NO BODY
 ```
 
 4. Delete an product.
@@ -363,7 +364,266 @@ Products is a list of objects that must have the follow fields:
 
 4.4 Response example:
 
+```md
+> **status-code:** 204
+> NO BODY
+```
+
+
+### Kits
+
+
+1. Create an kits.
+
+1.1 Path:
+> POST
+> /v1/kits
+
+1.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+1.3 Body example:
+
+```json
+{
+    "name": "kit 1",
+    "sku": "d8gasd8gasd8sagd8as",
+    "products": [
+      {
+        "id": "d9sh9dsdhs9dhs9dh",
+        "discount": 11.5,
+        "quantity": 2
+      },
+      {
+        "id": "hd9ah9dsah9hdsada",
+        "discount": 0.0,
+        "quantity": 1
+      }
+    ]
+}
+```
+
+1.4 Response example:
+
 ```json5
-// status-code: 204
-// NO BODY
+// status-code: 201
+{
+  "name": "kit 1",
+  "sku": "d8gasd8gasd8sagd8as",
+  "products": [
+    {
+      "id": "d9sh9dsdhs9dhs9dh",
+      "name": "par de meias",
+      "discount": 11.5,
+      "quantity": 2,
+    },
+    {
+      "id": "hd9ah9dsah9hdsada",
+      "name": "tênis",
+      "discount": 0.0,
+      "quantity": 1,
+    }
+  ],
+  "price": 30.00,
+  "cost": 25.00,
+  "stock": 10
+}
+```
+
+2. Read Kits.
+
+2.1 Read kits by filters or not.
+
+2.1.1 Path:
+> GET
+> /v1/kits
+
+2.1.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+2.1.3 Possible query filters:
+
+| name              | type     | format   | example                            | description                                                     | 
+|-------------------|----------|----------|------------------------------------|-----------------------------------------------------------------|
+| cost-lower-than   | float    | 00.00    | /v1/kits?cost-lower-than=100.00    | retrieves the kits with cost lower than the given value         |
+| cost-bigger-than  | float    | 00.00    | /v1/kits?cost-bigger-than=100.00   | retrieves the kits with cost bigger than the given value        |
+| price-lower-than  | float    | 00.00    | /v1/kits?price-lower-than=100.00   | retrieves the kits with price lower than the given value        |
+| cost-bigger-than  | float    | 00.00    | /v1/kits?price-bigger-than=100.00  | retrieves the kits with the price bigger than the given value   | 
+| stock-bigger-than | number   | 100000   | /v1/kits?stock-bigger-than=7       | retrieves the kits with stock stock bigger than the given value |
+| stock-lower-than  | number   | 100000   | /v1/kits?stock-lower-than=100      | retrieves the kits with stock stock lower than given value      |
+| created-after     | datetime | YY-mm-dd | /v1/kits?crated-after=2020-09-11   | retrieves the kits that was created after the given date        |
+| created-before    | datetime | YY-mm-dd | /v1/kits?created-before=2020-11-12 | retrieves the kits that was created before the given date       |
+| created-by        | string   | UUID     | /v1/kits?created-by=9jda9dj9asdas  | retrieves the kits that was created by the given user           |
+| product-id        | string   | UUID     | /v1/kits?product-id=hh2gd78ags8g2  | retrieves the kits that contains the given product              |
+
+2.1.4 Response example:
+
+```json5
+// status-code: 200
+[
+  {
+    "name": "kit 1",
+    "sku": "d8gasd8gasd8sagd8as",
+    "products": [
+      {
+        "id": "d9sh9dsdhs9dhs9dh",
+        "name": "par de meias",
+        "discount": 11.5,
+        "quantity": 2,
+      },
+      {
+        "id": "hd9ah9dsah9hdsada",
+        "name": "tênis",
+        "discount": 0.0,
+        "quantity": 1,
+      }
+    ],
+    "price": 30.00,
+    "cost": 25.00,
+    "stock": 10
+  },
+  {
+    "name": "kit 2",
+    "sku": "82g87dgg8g82",
+    "products": [
+      {
+        "id": "d9sh9dsdhs9dhs9dh",
+        "name": "par de meias rosas",
+        "discount": 15.00,
+        "quantity": 2,
+      },
+      {
+        "id": "hd9ah9dsah9hdsada",
+        "name": "tênis",
+        "discount": 0.0,
+        "quantity": 1,
+      }
+    ],
+    "price": 30.00,
+    "cost": 25.00,
+    "stock": 10
+  }
+]
+```
+
+2.2 Read kits by id.
+
+2.2.1 Path:
+> GET
+> /v1/kits/:id
+
+2.2.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+2.2.3 Needed path parameters:
+
+| name  | type   | format | example                    | description                                      | 
+|-------|--------|--------|----------------------------|--------------------------------------------------|
+| id    | string | UUID   | /v1/kits/jd9a9djsajd9da99a | defines the id of the kit that must be retrieved |
+
+
+2.2.4 Response example:
+
+```json5
+// status-code: 200
+{
+  "name": "kit 1",
+  "sku": "d8gasd8gasd8sagd8as",
+  "products": [
+    {
+      "id": "d9sh9dsdhs9dhs9dh",
+      "name": "par de meias",
+      "discount": 11.5,
+      "quantity": 2,
+    },
+    {
+      "id": "hd9ah9dsah9hdsada",
+      "name": "tênis",
+      "discount": 0.0,
+      "quantity": 1,
+    }
+  ],
+  "price": 30.00,
+  "cost": 25.00,
+  "stock": 10
+}
+```
+
+3. Update an kit.
+
+3.1 Path:
+> PATCH
+> /v1/kits/:id
+
+3.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+3.3 Needed path parameters:
+
+| name  | type   | format | example                    | description                                    | 
+|-------|--------|--------|----------------------------|------------------------------------------------|
+| id    | string | UUID   | /v1/kits/jd9a9djsajd9da99a | defines the id of the kit that will be updated |
+
+
+3.4 Possible body parameters:
+
+| name     | type   | format | 
+|----------|--------|--------|
+| name     | string |        |
+| products | float  | 00.00  |
+
+
+3.5 Response example:
+
+```md
+> **status-code:** 204
+> NO BODY
+```
+
+4. Delete an kit.
+
+4.1 Path:
+> DELETE
+> /v1/kits/:id
+
+4.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+4.3 Needed path parameters:
+
+| name  | type   | format | example                    | description                                    | 
+|-------|--------|--------|----------------------------|------------------------------------------------|
+| id    | string | UUID   | /v1/kits/jd9a9djsajd9da99a | defines the id of the kit that will be deleted |
+
+
+4.4 Response example:
+
+```md
+> **status-code:** 204
+> NO BODY
 ```
