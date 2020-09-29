@@ -6,16 +6,18 @@
 
 1. Products table
 
-| column     | type                      | description                                   | unique             |
-|------------|---------------------------|-----------------------------------------------|:------------------:|
-| id         | string(UUID)              | the product identifier                        | :heavy_check_mark: |
-| name       | string                    | the product name                              | :x:                | 
-| sku        | string                    | the product sku                               | :heavy_check_mark: |
-| cost       | float                     | the product cost                              | :x:                |
-| price      | float                     | the unit price                                | :x:                |
-| quantity   | int                       | the quantity in stock                         | :x:                |
-| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was created    | :x:                | 
-| created at | str(UUID)                 | the id of the member that created the product | :x:                | 
+| column     | type                      | description                                        | unique             |
+|------------|---------------------------|----------------------------------------------------|:------------------:|
+| id         | string(UUID)              | the product identifier                             | :heavy_check_mark: |
+| name       | string                    | the product name                                   | :x:                | 
+| sku        | string                    | the product sku                                    | :heavy_check_mark: |
+| cost       | float                     | the product cost                                   | :x:                |
+| price      | float                     | the unit price                                     | :x:                |
+| quantity   | int                       | the quantity in stock                              | :x:                |
+| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was created         | :x:                | 
+| created by | str(UUID)                 | the id of the member that created the product      | :x:                | 
+| updated at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was last updated    | :x:                | 
+| updated by | str(UUID)                 | the id of the member that last updated the product | :x:                | 
 
 2. Kit table
 
@@ -28,9 +30,10 @@
 | price      | float                     | the sum of all the products subtracting the discount percentage of each product in the kit | :x:                |
 | cost       | float                     | the sum of all the products that compose the kit                                           | :x:                | 
 | stock      | int                       | the quantity of possible kits in the stock based in the kit products stock                 | :x:                | 
-| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was created                                                 | :x:                | 
-| created by | str(UUID)                 | the id of the member that created the product                                              | :x:                | 
-
+| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the kit was created                                                     | :x:                | 
+| created by | str(UUID)                 | the id of the member that created the kit                                                  | :x:                | 
+| updated at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the kit was last updated                                                | :x:                | 
+| updated by | str(UUID)                 | the id of the member that last updated the kit                                             | :x:                | 
 
 2.1 products
 
@@ -297,4 +300,70 @@ Products is a list of objects that must have the follow fields:
     },
     "created-at": "2020-02-09T22:50:00Z"
 }
+```
+
+3. Update an product.
+
+3.1 Path:
+> PATCH
+> /v1/products/:id
+
+3.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+3.3 Needed path parameters:
+
+| name  | type   | format | example                        | description                                        | 
+|-------|--------|--------|--------------------------------|----------------------------------------------------|
+| id    | string | UUID   | /v1/products/jd9a9djsajd9da99a | defines the id of the product that will be updated |
+
+
+3.4 Possible body parameters:
+
+| name     | type   | format | 
+|----------|--------|--------|
+| name     | string |        |
+| cost     | float  | 00.00  |
+| price    | float  | 00.00  |
+| quantity | int    | 100    |
+
+
+3.5 Response example:
+
+```json5
+// status-code: 204
+// NO BODY
+```
+
+4. Delete an product.
+
+4.1 Path:
+> DELETE
+> /v1/products/:id
+
+4.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+4.3 Needed path parameters:
+
+| name  | type   | format | example                        | description                                        | 
+|-------|--------|--------|--------------------------------|----------------------------------------------------|
+| id    | string | UUID   | /v1/products/jd9a9djsajd9da99a | defines the id of the product that will be deleted |
+
+
+4.4 Response example:
+
+```json5
+// status-code: 204
+// NO BODY
 ```
