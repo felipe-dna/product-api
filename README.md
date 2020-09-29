@@ -129,6 +129,7 @@ Products is a list of objects that must have the follow fields:
 }
 ```
 
+
 ### Products
 
 1. Create new products.
@@ -192,11 +193,13 @@ Products is a list of objects that must have the follow fields:
 
 2. Read Products.
 
-1.1 Path:
+2.1 Read products by filters or not.
+
+2.1.1 Path:
 > GET
 > /v1/products
 
-1.2 Needed headers:
+2.1.2 Needed headers:
 
 ```json
 {
@@ -204,7 +207,7 @@ Products is a list of objects that must have the follow fields:
 }
 ```
 
-1.3 Possible query filters:
+2.1.3 Possible query filters:
 
 | name                 | type     | format   | example                                | description                                                            | 
 |----------------------|----------|----------|----------------------------------------|------------------------------------------------------------------------|
@@ -218,7 +221,7 @@ Products is a list of objects that must have the follow fields:
 | created-before       | datetime | YY-mm-dd | /v1/products?created-before=2020-11-12 | retrieves the products that was created before the given date          |
 | created-by           | string   | UUID     | /v1/products?created-by=9jda9dj9asdas  | retrieves the products that was created by the given user              |
 
-1.4 Response example:
+2.1.4 Response example:
 
 ```json5
 // status-code: 200
@@ -252,4 +255,46 @@ Products is a list of objects that must have the follow fields:
     "created-at": "2020-02-09T22:50:00Z"
   }
 ]
+```
+
+
+2.2 Read products by id.
+
+2.2.1 Path:
+> GET
+> /v1/products/:id
+
+2.2.2 Needed headers:
+
+```json
+{
+  "Authorization": "your-api-key"
+}
+```
+
+2.2.3 Needed path parameters:
+
+| name  | type   | format | example                        | description                                          | 
+|-------|--------|--------|--------------------------------|------------------------------------------------------|
+| id    | string | UUID   | /v1/products/jd9a9djsajd9da99a | defines the id of the product that must be retrieved |
+
+
+2.2.4 Response example:
+
+```json5
+// status-code: 200
+{
+    "id": 1,
+    "name": "product 1",
+    "sku": "d8gasd8gasd8sagd8as",
+    "cost": 17.50,
+    "price": 30.00,
+    "quantity": 100,
+    "created-by": {
+      "id": "hd9ashdashdashd9a",
+      "first-name": "John",
+      "last-name": "Doe"
+    },
+    "created-at": "2020-02-09T22:50:00Z"
+}
 ```
