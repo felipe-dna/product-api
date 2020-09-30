@@ -7,4 +7,4 @@ from accounts.viewsets import UserViewSet
 accounts_routes = routers.DefaultRouter()
 
 # Registering the routes.
-accounts_routes.register("users", UserViewSet)
+accounts_routes.register("", UserViewSet)
