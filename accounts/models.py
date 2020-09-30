@@ -1,16 +1,13 @@
 """Contains the accounts app models."""
 import uuid
 
+from django.contrib.auth.models import AbstractUser
 from djongo import models
 
 
-class User(models.Model):
+class User(AbstractUser):
     """Define the user model."""
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
-    first_name = models.CharField(max_length=80)
-    last_name = models.CharField(max_length=80)
-    email = models.EmailField(max_length=150, unique=True)
-    password = models.CharField(max_length=200)
 
     def get_full_name(self) -> str:
         """
