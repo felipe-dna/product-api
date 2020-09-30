@@ -8,15 +8,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+from .filtersets import ProductFilterSet
 from .models import Product
 from .serializers import ProductCreateReadSerializer, ProductDeleteUpdateDetailSerializer
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductCreateRetrieveViewSet(viewsets.ModelViewSet):
     """Define the Product entity view set."""
     queryset = Product.objects.all()
     serializer_class = ProductCreateReadSerializer
+    filterset_class = ProductFilterSet
     permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request: Request, *args: Any, **kwargs: Any) -> Response:
+        """"""
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
