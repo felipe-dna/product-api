@@ -6,7 +6,7 @@ from rest_framework import serializers
 from products.models import Product
 
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductCreateReadSerializer(serializers.ModelSerializer):
     """Define the serializer for the Product model."""
 
     class Meta:
@@ -53,6 +53,33 @@ class ProductSerializer(serializers.ModelSerializer):
 
         return new_product
 
+
+class ProductDeleteUpdateDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        """Define the serializer metadata."""
+        model = Product
+        fields = ["id", "name", "sku", "cost", "price", "quantity"]
+        extra_kwargs = {
+            "id": {
+                "read_only": True
+            },
+            "name": {
+                "required": False
+            },
+            "sku": {
+                "required": False
+            },
+            "cost": {
+                "required": False
+            },
+            "price": {
+                "required": False
+            },
+            "quantity": {
+                "required": False
+            },
+        }
+
     def update(self, instance: Product, validated_data: Dict[str, Any]) -> Product:
         """
         Update an product in the database.
@@ -69,6 +96,9 @@ class ProductSerializer(serializers.ModelSerializer):
         allowed_fields_to_update = ["name", "cost", "price", "quantity"]
 
         for current_field in allowed_fields_to_update:
+            if current_field not in allowed_fields_to_update:
+                raise serializers.ValidationError(f"`{current_field}` is not a valid field.")
+
             setattr(instance, current_field, validated_data.get(current_field, getattr(instance, current_field)))
 
         instance.save()
