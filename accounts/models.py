@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from djongo import models
 
 
-class User(AbstractUser):
+class User(AbstractUser, models.Model):
     """Define the user model."""
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
 

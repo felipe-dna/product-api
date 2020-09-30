@@ -1,8 +1,8 @@
 from django.urls import path, include
+from accounts.urls import urlpatterns
 
-from accounts.routes import accounts_routes
+app_name = "accounts"
 
 urlpatterns = [
-    path("users", include(accounts_routes.urls)),
-    path("users/authenticate", include('rest_framework.urls', namespace='rest_framework'))
+    path("users/", include(urlpatterns)),
 ]

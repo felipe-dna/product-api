@@ -2,6 +2,7 @@
 from typing import Dict, Any
 
 from rest_framework import serializers
+from rest_framework.authtoken.models import Token
 
 from accounts.models import User
 
@@ -12,6 +13,7 @@ class UserSerializer(serializers.Serializer):
     last_name = serializers.CharField(max_length=80)
     email = serializers.EmailField(max_length=150)
     password = serializers.CharField(max_length=200)
+    api_key = serializers.CharField(max_length=300, allow_blank=True, required=False)
 
     def create(self, validated_data: Dict[str, Any]) -> None:
         """
@@ -20,8 +22,12 @@ class UserSerializer(serializers.Serializer):
         :param validated_data: The parameters to create the new user.
         :type validated_data: Dict[str, Any]
         """
-        # TODO: cryptograph the user password and email.
-        new_user = User(**validated_data)
 
-        return new_user.objects.create()
+        created_user = User(**validated_data)
+        created_user.save()
 
+        created_user_token = Token(user=created_user)
+        created_user_token.save()
+
+        self.password = None
+        self.api_key = created_user_token.key
