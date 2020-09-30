@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 
     # Apps.
     "accounts",
-    "products"
+    "products",
+    "kits"
 ]
 
 MIDDLEWARE = [
