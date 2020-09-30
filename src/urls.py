@@ -4,5 +4,5 @@ from accounts.urls import urlpatterns
 app_name = "accounts"
 
 urlpatterns = [
-    path("users/", include(urlpatterns)),
+    path("users", include(urlpatterns)),
 ]
