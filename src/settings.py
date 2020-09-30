@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
 
     # Apps.
-    "accounts"
+    "accounts",
+    "products"
 ]
 
 MIDDLEWARE = [
@@ -139,6 +140,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ]
 }
 
 APPEND_SLASH = False

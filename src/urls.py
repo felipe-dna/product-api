@@ -1,8 +1,8 @@
 from django.urls import path, include
-from accounts.urls import urlpatterns
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("users", include(urlpatterns)),
+    path("users", include("accounts.urls")),
+    path("products", include("products.urls"))
 ]
