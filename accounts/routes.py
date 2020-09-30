@@ -4,7 +4,7 @@ from rest_framework import routers
 from accounts.viewsets import UserViewSet
 
 # Default router.
-accounts_routers = routers.DefaultRouter()
+accounts_routes = routers.DefaultRouter()
 
 # Registering the routes.
-accounts_routers.register("users", UserViewSet)
+accounts_routes.register("users", UserViewSet)
