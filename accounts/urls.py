@@ -8,8 +8,8 @@ from accounts.viewsets import UserViewSet
 app_name = "accounts"
 
 urlpatterns = [
-    path("", UserViewSet),
-    path("authenticate", TokenObtainPairView.as_view()),
-    path("refresh-token", TokenRefreshView.as_view()),
+    path("", UserViewSet.as_view({"post": "create"})),
+    path("/authenticate", TokenObtainPairView.as_view()),
+    path("/authenticate/refresh", TokenRefreshView.as_view()),
 ]
 
