@@ -17,7 +17,15 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """"""
+        """
+        Overwrite the create method to accept many items in the request.
+
+        :param request: The http request.
+        :type request: Request.
+
+        :return: The response object.
+        :rtype: Response.
+        """
         serializer = self.get_serializer(data=request.data, many=True)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
