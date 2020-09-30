@@ -6,6 +6,14 @@ from djongo import models
 from products.models import Product
 
 
+class KitItem(models.Model):
+    """"""
+    id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    discount = models.FloatField()
+
+
 class Kit(models.Model):
     """Define the kits model."""
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
@@ -14,7 +22,7 @@ class Kit(models.Model):
     cost = models.FloatField()
     price = models.FloatField()
     stock = models.IntegerField()
-    products = models.ManyToManyField(to=Product)
+    products = models.ManyToManyField(to=KitItem)
 
     def __str__(self) -> str:
         """
