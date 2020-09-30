@@ -14,7 +14,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "sku", "cost", "price", "quantity"]
         extra_kwargs = {
             "id": {
-                "read_only"
+                "read_only": True
             }
         }
 
@@ -25,7 +25,7 @@ class ProductSerializer(serializers.ModelSerializer):
         retrieved_products = Product.objects.filter(sku=sku)
 
         if len(retrieved_products) >= 1:
-            raise serializers.ValidationError("This sku already exists.")
+            raise serializers.ValidationError(f"A product with sku `{sku}` already exists.")
 
         return sku
 
