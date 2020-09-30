@@ -8,8 +8,10 @@ from djongo import models
 class User(AbstractUser, models.Model):
     """Define the user model."""
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
+    email = models.EmailField(max_length=300, unique=True)
 
     USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'password']
 
     def get_full_name(self) -> str:
         """
