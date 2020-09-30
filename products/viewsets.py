@@ -20,9 +20,6 @@ class ProductCreateRetrieveViewSet(viewsets.ModelViewSet):
     filterset_class = ProductFilterSet
     permission_classes = [IsAuthenticated]
 
-    def retrieve(self, request: Request, *args: Any, **kwargs: Any) -> Response:
-        """"""
-
     def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         """
         Overwrite the create method to accept many items in the request.
