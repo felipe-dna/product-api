@@ -14,10 +14,6 @@ class Product(models.Model):
     cost = models.FloatField()
     price = models.FloatField()
     quantity = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    created_by = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    updated_at = models.DateTimeField()
-    updated_by = models.ForeignKey(to=User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         """
