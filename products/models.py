@@ -3,8 +3,6 @@ import uuid
 
 from djongo import models
 
-from accounts.models import User
-
 
 class Product(models.Model):
     """Define the products model."""
