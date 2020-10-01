@@ -83,12 +83,33 @@ WSGI_APPLICATION = 'src.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# https://nesdis.github.io/djongo/
+
+DATABASE_PASSWORD = os.environ.get("DATABASE_PASSWORD", None)
+DATABASE_USER = os.environ.get("DATABASE_USER", None)
+DATABASE_HOST = os.environ.get("DATABASE_HOST", None)
+DATABASE_PORT = os.environ.get("DATABASE_PORT", None)
+
+default_database_configuration = {
+    'ENGINE': 'djongo',
+    'NAME': os.environ.get("DATABASE_NAME"),
+}
+
+if DATABASE_PASSWORD is not None:
+    default_database_configuration["PASSWORD"] = DATABASE_PASSWORD
+
+if DATABASE_USER is not None:
+    default_database_configuration["USER"] = DATABASE_USER
+
+if DATABASE_PORT is not None:
+    default_database_configuration["HOST"] = DATABASE_HOST
+
+if DATABASE_HOST is not None:
+    default_database_configuration["PORT"] = DATABASE_PORT
+
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'NAME': os.environ.get("DATABASE_NAME"),
-    }
+    'default': default_database_configuration
 }
 
 

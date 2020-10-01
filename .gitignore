@@ -1,6 +1,10 @@
 # venv
 venv/
 
+# cache
+**/__pycache__/
+
+**/migrations
 
 # IDE Configs.
 .idea/
