@@ -1,5 +1,64 @@
 # This is an rest API to manage product inventory.
 
+## Installation guide
+
+1. Required environment.
+
+```
+- Python 3.7 
+- MongoDB 3.4 >
+```
+
+2. clone the repo.
+
+```sh
+$ git clone git@github.com:felipe-dna/product-api.git
+```
+
+3. Install the requirements.
+
+```
+$ cd product-api
+
+$ python3 -m venv venv
+
+$ source venv/bin/activate
+
+$ pip install -r requirements.txt
+```
+
+4. Set environment required variables:
+
+| variable name | description |
+|---------------|-------------|
+| DATABASE_NAME | The name of the database |
+| DEBUG         | A boolean value that define the DEBUG value for Django |
+| SECRET_KEY    | A key used to encrypt and decrypt some data in Django |
+
+5. If your database need authentication or the host where it is running is different from the default, pass this another 
+variables:
+
+| variable name | description |
+|---------------|-------------|
+| DATABASE_USER     | The database user |
+| DATABASE_PASSWORD | The database password |
+| DATABASE_HOST     | The database host |
+| DATABASE_PORT     | The database port |
+
+
+7. Make the migrations.
+
+```
+$ python manage.py makemigrations accounts kits products
+$ python migrate
+```
+
+8. Run the server.
+
+```
+$ python manage.py runserver
+```
+
 
 ## Database Modelling
 
@@ -14,10 +73,6 @@
 | cost       | float                     | the product cost                                   | :x:                |
 | price      | float                     | the unit price                                     | :x:                |
 | quantity   | int                       | the quantity in stock                              | :x:                |
-| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was created         | :x:                | 
-| created by | str(UUID)                 | the id of the member that created the product      | :x:                | 
-| updated at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the product was last updated    | :x:                | 
-| updated by | str(UUID)                 | the id of the member that last updated the product | :x:                | 
 
 2. Kit table
 
@@ -30,10 +85,6 @@
 | price      | float                     | the sum of all the products subtracting the discount percentage of each product in the kit | :x:                |
 | cost       | float                     | the sum of all the products that compose the kit                                           | :x:                | 
 | stock      | int                       | the quantity of possible kits in the stock based in the kit products stock                 | :x:                | 
-| created at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the kit was created                                                     | :x:                | 
-| created by | str(UUID)                 | the id of the member that created the kit                                                  | :x:                | 
-| updated at | datetime(Y/m/dTHH:MM:SSZ) | the datetime where the kit was last updated                                                | :x:                | 
-| updated by | str(UUID)                 | the id of the member that last updated the kit                                             | :x:                | 
 
 2.1 products
 
@@ -146,7 +197,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -207,7 +258,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -272,7 +323,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -313,7 +364,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -351,7 +402,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -383,7 +434,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -447,7 +498,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -526,7 +577,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -574,7 +625,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
@@ -610,7 +661,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "your-api-key"
+  "Authorization": "Bearer <access-token>"
 }
 ```
 
