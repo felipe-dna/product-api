@@ -1,5 +1,7 @@
 """Contains the kits app view sets."""
 from typing import Any, List, Dict, Tuple
+
+from django.http import QueryDict
 from rest_framework import serializers
 
 from rest_framework import status
@@ -9,14 +11,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from kits.models import Kit, KitItem
-from kits.serializers import KitsSerializer
 from products.models import Product
 
 
 class KitsViewSet(APIView):
     """Define the kits view set."""
     queryset = Kit.objects.all()
-    serializer_class = KitsSerializer
     permission_classes = [IsAuthenticated]
 
     def post(self, request: Request) -> Response:
@@ -55,6 +55,37 @@ class KitsViewSet(APIView):
         serialized_kit_object = self.__serialize_kit(new_kit)
 
         return Response(serialized_kit_object, status=status.HTTP_201_CREATED)
+
+    def get(self, request: Request) -> Response:
+        """"""
+        query_parameters: QueryDict = request.query_params
+
+        filter_parameters = {}
+
+        for filter_name, filter_value in query_parameters.items():
+            if filter_name == "cost-lower-than":
+                filter_parameters["cost__lt"] = float(filter_value)
+            elif filter_name == "cost-bigger-than":
+                filter_parameters["cost__gt"] = float(filter_value)
+            elif filter_name == "price-lower-than":
+                filter_parameters["price__lt"] = float(filter_value)
+            elif filter_name == "price-bigger-than":
+                filter_parameters["price__gt"] = float(filter_value)
+            elif filter_name == "stock-lower-than":
+                filter_parameters["stock__lt"] = int(filter_value)
+            elif filter_name == "stock-bigger-than":
+                filter_parameters["stock__gt"] = int(filter_value)
+
+        if len(filter_parameters) != 0:
+            kits = Kit.objects.filter(**filter_parameters)
+        else:
+            kits = Kit.objects.all()
+
+        response = []
+        for current_kit_object in kits:
+            response.append(self.__serialize_kit(current_kit_object))
+
+        return Response(response, status=status.HTTP_200_OK)
 
     @staticmethod
     def __validate_kit_parameters_on_create(parameters: Dict[str, Any]) -> None:
