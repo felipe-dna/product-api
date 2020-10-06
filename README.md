@@ -131,7 +131,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "<internal-api-key>"
+  "access": "<internal-api-key>"
 }
 ```
 
@@ -180,7 +180,8 @@ Products is a list of objects that must have the follow fields:
 ```json5
 // status-code: 200
 {
-  "api-key": "the-created-user-api-key"
+  "access": "the-created-user-api-key",
+  "refresh": "the-key-used-to-refresh-the-api-key"
 }
 ```
 
@@ -197,7 +198,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -258,7 +259,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -323,7 +324,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -364,7 +365,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -402,7 +403,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -434,7 +435,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -498,7 +499,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -577,7 +578,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -625,7 +626,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
@@ -661,7 +662,7 @@ Products is a list of objects that must have the follow fields:
 
 ```json
 {
-  "Authorization": "Bearer <access-token>"
+  "access": "Bearer <access-token>"
 }
 ```
 
